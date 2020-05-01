@@ -1,4 +1,4 @@
-/* PptxGenJS 3.2.0-beta @ 2020-03-18T02:34:15.896Z */
+/* PptxGenJS 3.2.0-beta @ 2020-05-01T13:58:57.036Z */
 import * as JSZip from 'jszip';
 
 /**
@@ -2485,7 +2485,7 @@ function makeXmlContTypes(slides, slideLayouts, masterSlide) {
     strXml += '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>';
     strXml += '<Default Extension="jpeg" ContentType="image/jpeg"/>';
     strXml += '<Default Extension="jpg" ContentType="image/jpg"/>';
-    // STEP 1: Add standard/any media types used in Presenation
+    // STEP 1: Add standard/any media types used in Presentation
     strXml += '<Default Extension="png" ContentType="image/png"/>';
     strXml += '<Default Extension="gif" ContentType="image/gif"/>';
     strXml += '<Default Extension="m4v" ContentType="video/mp4"/>'; // NOTE: Hard-Code this extension as it wont be created in loop below (as extn !== type)
@@ -3484,7 +3484,7 @@ function addShapeDefinition(target, shapeName, opt) {
  * @param {TableRow[]} arrTabRows - table data
  * @param {ITableOptions} inOpt - table options
  * @param {ISlideLayout} slideLayout - Slide layout
- * @param {ILayout} presLayout - Presenation layout
+ * @param {ILayout} presLayout - Presentation layout
  * @param {Function} addSlide - method
  * @param {Function} getSlide - method
  */
@@ -3785,7 +3785,7 @@ function addBackgroundDefinition(bkg, target) {
             extn: strImgExtn,
             data: bkg.data || null,
             rId: intRels,
-            Target: '../media/image' + (target.relsMedia.length + 1) + '.' + strImgExtn,
+            Target: '../media/' + target.name + '-image-' + (target.relsMedia.length + 1) + '.' + strImgExtn,
         });
         target.bkgdImgRid = intRels;
     }
@@ -6359,7 +6359,7 @@ var PptxGenJS = /** @class */ (function () {
     });
     // EXPORT METHODS
     /**
-     * Export the current Presenation to stream
+     * Export the current Presentation to stream
      * @returns {Promise<string | ArrayBuffer | Blob | Buffer | Uint8Array>} file stream
      */
     PptxGenJS.prototype.stream = function () {
@@ -6375,7 +6375,7 @@ var PptxGenJS = /** @class */ (function () {
         });
     };
     /**
-     * Export the current Presenation as JSZip content with the selected type
+     * Export the current Presentation as JSZip content with the selected type
      * @param {JSZIP_OUTPUT_TYPE} outputType - 'arraybuffer' | 'base64' | 'binarystring' | 'blob' | 'nodebuffer' | 'uint8array'
      * @returns {Promise<string | ArrayBuffer | Blob | Buffer | Uint8Array>} file content in selected type
      */
@@ -6392,7 +6392,7 @@ var PptxGenJS = /** @class */ (function () {
         });
     };
     /**
-     * Export the current Presenation. Writes file to local file system if `fs` exists, otherwise, initiates download in browsers
+     * Export the current Presentation. Writes file to local file system if `fs` exists, otherwise, initiates download in browsers
      * @param {string} exportName - file name
      * @returns {Promise<string>} the presentation name
      */
@@ -6407,7 +6407,7 @@ var PptxGenJS = /** @class */ (function () {
                     .endsWith('.pptx')
                     ? exportName
                     : exportName + '.pptx'
-                : 'Presenation.pptx';
+                : 'Presentation.pptx';
             _this.exportPresentation(fs ? 'nodebuffer' : null)
                 .then(function (content) {
                 if (fs) {
@@ -6428,7 +6428,7 @@ var PptxGenJS = /** @class */ (function () {
     };
     // PRESENTATION METHODS
     /**
-     * Add a new Section to Presenation
+     * Add a new Section to Presentation
      * @param {ISectionProps} section - section properties
      * @example pptx.addSection({ title:'Charts' });
      */
@@ -6448,7 +6448,7 @@ var PptxGenJS = /** @class */ (function () {
             this._sections.push(newSection);
     };
     /**
-     * Add a new Slide to Presenation
+     * Add a new Slide to Presentation
      * @param {IAddSlideOptions} options - slide options
      * @returns {ISlide} the new Slide
      */
